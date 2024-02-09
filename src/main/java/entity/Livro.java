@@ -27,7 +27,7 @@ public class Livro {
     @Getter @Setter
     private SimNao alugado;
 
-    @ManyToOne
+    @ManyToOne @Getter @Setter
     private Pessoa pessoaQueAlugou;
 
     @Getter @Setter
