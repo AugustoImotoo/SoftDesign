@@ -80,7 +80,7 @@ public class LivroService {
     public boolean deleteLivroById(Long livroId) {
         Optional<Livro> livroOptional = livroRepository.findById(livroId);
         if (livroOptional.isPresent()) {
-            if (livroOptional.get().getAlugado() != null && livroOptional.get().getAlugado().equals(SimNao.NAO)) {
+            if (livroOptional.get().getAlugado() != null && livroOptional.get().getAlugado().equals(SimNao.SIM)) {
                 return false;
             }
             Livro livro = livroOptional.get();
