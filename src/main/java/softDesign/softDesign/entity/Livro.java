@@ -1,6 +1,7 @@
-package entity;
+package softDesign.softDesign.entity;
 
-import enumeration.SimNao;
+import lombok.Data;
+import softDesign.softDesign.enumeration.SimNao;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -11,26 +12,17 @@ import lombok.Setter;
 import java.time.LocalDate;
 
 @Entity
+@Data
 public class Livro {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
-
-    @Getter @Setter
     private String titulo;
-
-    @Getter @Setter
     private String autor;
-
-    @Getter @Setter
     private String editora;
-
-    @Getter @Setter
     private SimNao alugado;
-
-    @ManyToOne @Getter @Setter
+    @ManyToOne
     private Pessoa pessoaQueAlugou;
-
-    @Getter @Setter
     private LocalDate dataDevolucao;
 
     public Livro() {
