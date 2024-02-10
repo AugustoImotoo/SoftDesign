@@ -79,25 +79,31 @@ public class LivroService {
 
     public boolean deleteLivroById(Long livroId) {
         Optional<Livro> livroOptional = livroRepository.findById(livroId);
-        if (livroOptional.get().getAlugado() != null && livroOptional.get().getAlugado().equals(SimNao.NAO)) {
-            return false;
+        if (livroOptional.isPresent()) {
+            if (livroOptional.get().getAlugado() != null && livroOptional.get().getAlugado().equals(SimNao.NAO)) {
+                return false;
+            }
+            Livro livro = livroOptional.get();
+            livroRepository.delete(livro);
+            return true;
         }
-        Livro livro = livroOptional.get();
-        livroRepository.delete(livro);
-        return true;
+        return false;
     }
 
     public boolean editarLivro(Long livroId, Livro livroAtualizado) {
         Optional<Livro> livroOptional = livroRepository.findById(livroId);
-        if (livroOptional.get().getAlugado() != null && livroOptional.get().getAlugado().equals(SimNao.SIM)) {
-            return false;
-        }
+        if (livroOptional.isPresent()) {
+            if (livroOptional.get().getAlugado() != null && livroOptional.get().getAlugado().equals(SimNao.SIM)) {
+                return false;
+            }
 
-        Livro livroExistente = livroOptional.get();
-        livroExistente.setTitulo(livroAtualizado.getTitulo());
-        livroExistente.setAutor(livroAtualizado.getAutor());
-        livroExistente.setEditora(livroAtualizado.getEditora());
-        livroRepository.save(livroExistente);
-        return true;
+            Livro livroExistente = livroOptional.get();
+            livroExistente.setTitulo(livroAtualizado.getTitulo());
+            livroExistente.setAutor(livroAtualizado.getAutor());
+            livroExistente.setEditora(livroAtualizado.getEditora());
+            livroRepository.save(livroExistente);
+            return true;
+        }
+        return false;
     }
 }
