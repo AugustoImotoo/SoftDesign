@@ -1,0 +1,30 @@
+<!-- Conteúdo do componente CadastroPessoasComponent -->
+<div>
+    <h2>Cadastro de Pessoas</h2>
+    <div class="d-flex justify-content-end mb-3"> <!-- Adicionado classe "d-flex justify-content-end" -->
+            <div class="btn-group">
+                <button class="btn btn-primary" (click)="adicionarPessoa()">Adicionar</button>
+            </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Telefone</th>
+                <th>Ações</th> <!-- Nova coluna para os botões de ação -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let pessoa of pessoas">
+                <td>{{ pessoa.id }}</td>
+                <td>{{ pessoa.nome }}</td>
+                <td>{{ pessoa.telefone }}</td>
+                <td>
+                    <button class="btn btn-warning" (click)="editarPessoa(pessoa)">Editar</button>
+                    <button class="btn btn-danger" (click)="excluirPessoa(pessoa)">Excluir</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
