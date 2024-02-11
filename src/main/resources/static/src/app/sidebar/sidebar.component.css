@@ -1,0 +1,23 @@
+.sidebar {
+    position: fixed; /* Manter o sidebar fixo na tela durante a rolagem */
+    top: 50px; /* Adicionar margem superior para criar espaço entre o cabeçalho e a sidebar */
+    left: 0;
+    height: calc(100% - 60px); /* Ajustar a altura para levar em conta a margem superior do cabeçalho */
+    background-color: #333;
+    padding: 20px;
+    z-index: 999; /* Defina um z-index maior para a sidebar */
+  }
+  
+  .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sidebar ul li {
+    margin-bottom: 10px;
+  }
+  
+  .sidebar ul li a {
+    color: #fff;
+    text-decoration: none;
+  }
