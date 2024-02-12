@@ -40,6 +40,10 @@ export class LivroCadastroComponent {
   pessoas: Pessoa[] = [];
   successMessage: string | null = null;
   errorMessage: string | null = null;
+  filtro: string = '';
+  filtroAutor: string = '';
+  filtroEditora: string = '';
+  filtroTitulo: string = '';
 
   constructor(private http: HttpClient, private changeDetectorRef: ChangeDetectorRef, private toastr: ToastrService) { }
 
@@ -204,5 +208,20 @@ export class LivroCadastroComponent {
         console.error('Erro ao alugar livro:', error);
       }
     );
+  }
+
+  aplicarFiltros(): void {
+    this.livros = this.livros.filter(livro =>
+      livro.titulo.toLowerCase().includes(this.filtroTitulo.toLowerCase()) &&
+      livro.autor.toLowerCase().includes(this.filtroAutor.toLowerCase()) &&
+      livro.editora.toLowerCase().includes(this.filtroEditora.toLowerCase())
+    );
+  }
+
+  limparFiltros(): void {
+    this.filtroTitulo = '';
+    this.filtroAutor = '';
+    this.filtroEditora = '';
+    this.carregarLivros();
   }
 }

@@ -1,35 +1,71 @@
-<button type="button" class="btn btn-primary mb-4 mt-4" (click)="abrirModalAdicao()">Adicionar Livro</button>
+<button type="button" class="btn btn-primary mb-4 mt-4 mr-2" (click)="abrirModalAdicao()">Adicionar Livro</button>
+<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#filtroModal">
+  Abrir Filtro
+</button>
 
-<table class="table table-striped">
-    <thead class="thead-dark">
-      <tr>
-        <th class="titulo-tabela">ID</th>
-        <th class="titulo-tabela">Título</th>
-        <th class="titulo-tabela">Autor</th>
-        <th class="titulo-tabela">Editora</th>
-        <th class="titulo-tabela">Alugado</th>
-        <th class="titulo-tabela">Pessoa que Alugou</th>
-        <th class="titulo-tabela">Data de Devolução</th>
-        <th class="titulo-tabela">Ações</th>
+<div class="modal" id="filtroModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Filtrar Livros</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="filtroTitulo">Filtrar por Título:</label>
+          <input type="text" class="form-control" id="filtroTitulo" [(ngModel)]="filtroTitulo" name="filtroTitulo" placeholder="Digite o título">
+        </div>
+        <div class="form-group">
+          <label for="filtroAutor">Filtrar por Autor:</label>
+          <input type="text" class="form-control" id="filtroAutor" [(ngModel)]="filtroAutor" name="filtroAutor" placeholder="Digite o autor">
+        </div>
+        <div class="form-group">
+          <label for="filtroEditora">Filtrar por Editora:</label>
+          <input type="text" class="form-control" id="filtroEditora" [(ngModel)]="filtroEditora" name="filtroEditora" placeholder="Digite a editora">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="aplicarFiltros()">Aplicar Filtros</button>
+        <button type="button" class="btn btn-secondary" (click)="limparFiltros()">Limpar Filtros</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="table-responsive">
+  <table class="table table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th class="titulo-tabela">ID</th>
+          <th class="titulo-tabela">Título</th>
+          <th class="titulo-tabela">Autor</th>
+          <th class="titulo-tabela">Editora</th>
+          <th class="titulo-tabela">Alugado</th>
+          <th class="titulo-tabela">Pessoa que Alugou</th>
+          <th class="titulo-tabela">Data de Devolução</th>
+          <th class="titulo-tabela">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let livro of livros">
+          <td>{{ livro.id }}</td>
+          <td>{{ livro.titulo }}</td>
+          <td>{{ livro.autor }}</td>
+          <td>{{ livro.editora }}</td>
+          <td>{{ livro.alugado }}</td>
+          <td>{{ livro.pessoaQueAlugou?.nomeCompleto }}</td>
+          <td>{{ livro.dataDevolucao }}</td>
+          <td>
+          <button type="button" class="btn btn-primary mr-2" (click)="editarLivro(livro)">Editar</button>
+          <button type="button" class="btn btn-danger mr-2" (click)="excluirLivro(livro)">Excluir</button>
+          <button type="button" class="btn btn-success mr-2" (click)="devolverLivro(livro)" *ngIf="livro.alugado === 'SIM'">Devolver</button>
+        </td>
       </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let livro of livros">
-        <td>{{ livro.id }}</td>
-        <td>{{ livro.titulo }}</td>
-        <td>{{ livro.autor }}</td>
-        <td>{{ livro.editora }}</td>
-        <td>{{ livro.alugado }}</td>
-        <td>{{ livro.pessoaQueAlugou?.nomeCompleto }}</td>
-        <td>{{ livro.dataDevolucao }}</td>
-        <td>
-        <button type="button" class="btn btn-primary" (click)="editarLivro(livro)">Editar</button>
-        <button type="button" class="btn btn-danger" (click)="excluirLivro(livro)">Excluir</button>
-        <button type="button" class="btn btn-success" (click)="devolverLivro(livro)" *ngIf="livro.alugado === 'SIM'">Devolver</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</div>
 
 <div class="modal" id="adicionarLivroModal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
@@ -72,7 +108,7 @@
               <input type="date" class="form-control" id="dataDevolucao" [(ngModel)]="novoLivro.dataDevolucao" name="dataDevolucao">
             </div>
             <button *ngIf="modoEdicao === false" type="submit" class="btn btn-primary">Adicionar Livro</button>
-            <button *ngIf="modoEdicao === true" type="button" class="btn btn-primary" (click)="salvarEdicaoLivro()">Editar Livro</button>
+            <button *ngIf="modoEdicao === true" type="button" class="btn btn-primary mr-2" (click)="salvarEdicaoLivro()">Editar Livro</button>
             <button *ngIf="novoLivro.alugado === 'SIM'" type="button" class="btn btn-success" (click)="alugarLivro(novoLivro)">Alugar</button>
           </form>
       </div>
@@ -85,4 +121,22 @@
 </div>
 <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
   {{ errorMessage }}
+</div>
+<div *ngFor="let livro of livros">
+  <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="..." alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{ livro.titulo }}</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">{{ livro.autor }}</li>
+      <li class="list-group-item">Dapibus ac facilisis in</li>
+      <li class="list-group-item">Vestibulum at eros</li>
+    </ul>
+    <div class="card-body">
+      <a href="#" class="card-link">Card link</a>
+      <a href="#" class="card-link">Another link</a>
+    </div>
+  </div>
 </div>
