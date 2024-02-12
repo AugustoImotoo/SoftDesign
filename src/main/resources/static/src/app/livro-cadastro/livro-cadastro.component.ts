@@ -15,6 +15,12 @@ export interface Livro {
   dataDevolucao?: Date;
 }
 
+export interface AluguelRequest {
+  pessoaId: number;
+  livroId: number;
+  dataDevolucao: Date;
+}
+
 @Component({
   selector: 'app-livro-cadastro',
   templateUrl: './livro-cadastro.component.html',
@@ -121,8 +127,6 @@ export class LivroCadastroComponent {
         this.carregarLivros();
       },
       error => {
-        console.log('Erro ao excluir livro:', error);
-        console.log('Erro ao excluir livro:', livro);
         this.showErrorMessage("Erro ao excluir registro")
         this.carregarLivros();
       }
@@ -149,18 +153,56 @@ export class LivroCadastroComponent {
 
   showSuccessMessage(message: string) {
     this.successMessage = message;
-    this.errorMessage = null; // Limpa a mensagem de erro
+    this.errorMessage = null;
     setTimeout(() => {
-      this.successMessage = null; // Limpa a mensagem de sucesso após alguns segundos
-    }, 3000); // Tempo em milissegundos
+      this.successMessage = null; 
+    }, 3000);
   }
 
-  // Método para exibir uma mensagem de erro
   showErrorMessage(message: string) {
     this.errorMessage = message;
-    this.successMessage = null; // Limpa a mensagem de sucesso
+    this.successMessage = null;
     setTimeout(() => {
-      this.errorMessage = null; // Limpa a mensagem de erro após alguns segundos
-    }, 3000); // Tempo em milissegundos
+      this.errorMessage = null;
+    }, 3000);
+  }
+
+  devolverLivro(livro: Livro) {
+    const aluguelRequest: AluguelRequest = {
+      pessoaId: livro.pessoaQueAlugou ? livro.pessoaQueAlugou.id : -1,
+      livroId: livro.id,
+      dataDevolucao: new Date()
+    };
+  
+    this.http.put('http://localhost:8080/livro/devolver', aluguelRequest).subscribe(
+      response => {
+        this.showSuccessMessage("Livro devolvido com sucesso.");
+        this.carregarLivros();
+      },
+      error => {
+        this.showErrorMessage("Erro ao devolver livro");
+        console.error('Erro ao devolver livro:', error);
+      }
+    );
+  }
+
+  alugarLivro(livro: Livro) {
+    const aluguelRequest: AluguelRequest = {
+      pessoaId: livro.pessoaQueAlugou ? livro.pessoaQueAlugou.id : -1,
+      livroId: livro.id,
+      dataDevolucao: new Date()
+    };
+  
+    this.http.put('http://localhost:8080/livro/alugar', aluguelRequest).subscribe(
+      response => {
+        this.showSuccessMessage("Livro alugado com sucesso.");
+        this.carregarLivros();
+        this.fecharModalAdicao();
+      },
+      error => {
+        this.showErrorMessage("Erro ao alugar livro");
+        console.error('Erro ao alugar livro:', error);
+      }
+    );
   }
 }

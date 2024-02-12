@@ -47,10 +47,6 @@ public class LivroService {
             return false;
         }
 
-        if (livro.getAlugado() != null && livro.getAlugado().equals(SimNao.SIM)) {
-            return false;
-        }
-
         livro.setAlugado(SimNao.SIM);
         livro.setPessoaQueAlugou(pessoa);
         livro.setDataDevolucao(dataDevolucao);
@@ -62,10 +58,6 @@ public class LivroService {
     public boolean devolverLivro(Long livroId, Pessoa pessoa){
         Livro livro = livroRepository.findById(livroId).orElse(null);
         if (livro == null){
-            return false;
-        }
-
-        if (livro.getAlugado() != null && livro.getAlugado().equals(SimNao.NAO)) {
             return false;
         }
 

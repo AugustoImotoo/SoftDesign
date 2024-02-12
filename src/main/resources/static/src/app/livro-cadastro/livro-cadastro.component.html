@@ -25,6 +25,7 @@
         <td>
         <button type="button" class="btn btn-primary" (click)="editarLivro(livro)">Editar</button>
         <button type="button" class="btn btn-danger" (click)="excluirLivro(livro)">Excluir</button>
+        <button type="button" class="btn btn-success" (click)="devolverLivro(livro)" *ngIf="livro.alugado === 'SIM'">Devolver</button>
       </td>
     </tr>
   </tbody>
@@ -72,6 +73,7 @@
             </div>
             <button *ngIf="modoEdicao === false" type="submit" class="btn btn-primary">Adicionar Livro</button>
             <button *ngIf="modoEdicao === true" type="button" class="btn btn-primary" (click)="salvarEdicaoLivro()">Editar Livro</button>
+            <button *ngIf="novoLivro.alugado === 'SIM'" type="button" class="btn btn-success" (click)="alugarLivro(novoLivro)">Alugar</button>
           </form>
       </div>
     </div>
