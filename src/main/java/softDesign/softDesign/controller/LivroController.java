@@ -100,7 +100,7 @@ public class LivroController {
     public ResponseEntity<?> deleteLivro(@PathVariable Long livroId) {
         boolean deleted = livroService.deleteLivroById(livroId);
         if (deleted) {
-            return ResponseEntity.ok("Livro deletado com sucesso.");
+            return ResponseEntity.ok().body("{\"message\": \"Livro deletado com sucesso.\"}");
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Livro não encontrado ou alugado.");
         }

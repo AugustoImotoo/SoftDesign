@@ -40,9 +40,9 @@ public class PessoaController {
     public ResponseEntity<?> excluirPessoa(@PathVariable Long id) {
         boolean pessoaExcluida = pessoaService.excluirPessoa(id);
         if (pessoaExcluida) {
-            return ResponseEntity.noContent().build(); // Retorna 204 No Content se a exclusão for bem-sucedida
+            return ResponseEntity.noContent().build();
         } else {
-            return ResponseEntity.notFound().build(); // Retorna 404 Not Found se a pessoa não for encontrada
+            return ResponseEntity.notFound().build();
         }
     }
 

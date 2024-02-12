@@ -34,7 +34,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Adicionar Livro</h5>
+        <h5 class="modal-title">{{ modoEdicao ? 'Editando Livro' : 'Adicionar Livro' }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="fecharModalAdicao()">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -70,9 +70,17 @@
               <label for="dataDevolucao">Data de Devolução:</label>
               <input type="date" class="form-control" id="dataDevolucao" [(ngModel)]="novoLivro.dataDevolucao" name="dataDevolucao">
             </div>
-            <button type="submit" class="btn btn-primary">Adicionar Livro</button>
+            <button *ngIf="modoEdicao === false" type="submit" class="btn btn-primary">Adicionar Livro</button>
+            <button *ngIf="modoEdicao === true" type="button" class="btn btn-primary" (click)="salvarEdicaoLivro()">Editar Livro</button>
           </form>
       </div>
     </div>
   </div>
+</div>
+
+<div class="alert alert-success" role="alert" *ngIf="successMessage">
+  {{ successMessage }}
+</div>
+<div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+  {{ errorMessage }}
 </div>
