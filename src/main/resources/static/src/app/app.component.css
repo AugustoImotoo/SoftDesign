@@ -11,3 +11,40 @@
     margin-left: 9%;
     width: 90%;
   }
+
+  /* Altera a cor de fundo das notificações de sucesso */
+.toast-success {
+  background-color: #28a745;
+}
+
+/* Altera a cor de fundo das notificações de erro */
+.toast-error {
+  background-color: #dc3545;
+}
+
+/* Altera a cor do texto das notificações */
+.toast-message {
+  color: #fff;
+}
+
+/* Altera a fonte e o tamanho do texto das notificações */
+.toast-message {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+/* Altera o espaçamento interno das notificações */
+.toast-container .toast {
+  padding: 10px 20px;
+}
+
+/* Altera a borda das notificações */
+.toast-container .toast {
+  border-radius: 5px;
+}
+
+/* Altera a posição das notificações */
+.toast-top-right {
+  top: 20px;
+  right: 20px;
+}

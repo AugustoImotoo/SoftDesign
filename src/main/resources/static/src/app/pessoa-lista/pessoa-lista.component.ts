@@ -20,6 +20,8 @@ export class PessoaListaComponent implements OnInit {
     telefone: ''
   };
   pessoaSelecionada: Pessoa | null = null;
+  successMessage: string | null = null;
+  errorMessage: string | null = null;
 
   constructor(private http: HttpClient) { }
 
@@ -33,6 +35,7 @@ export class PessoaListaComponent implements OnInit {
         this.pessoas = data;
       },
       error => {
+        this.showErrorMessage("Erro ao carregar registros")
         console.error('Erro ao carregar pessoas:', error);
       }
     );
@@ -42,10 +45,12 @@ export class PessoaListaComponent implements OnInit {
     this.http.post('http://localhost:8080/pessoa', novaPessoa).subscribe(
       response => {
         console.log('Pessoa cadastrada com sucesso:', response);
+        this.showSuccessMessage("Registro gravado com sucesso");
         this.carregarPessoas(); 
         this.fecharModalAdicao(); 
       },
       error => {
+        this.showErrorMessage("Erro ao gravar registro")
         console.error('Erro ao cadastrar pessoa:', error);
       }
     );
@@ -77,13 +82,32 @@ export class PessoaListaComponent implements OnInit {
         if (index !== -1) {
           this.pessoas.splice(index, 1);
           console.log('Pessoa excluída:', pessoa);
+          this.showSuccessMessage("Registro excluido com sucesso");
         } else {
           console.error('Erro: Pessoa não encontrada na lista');
         }
       },
       error => {
+        this.showErrorMessage("Erro ao excluir registro")
         console.error('Erro ao excluir pessoa:', error);
       }
     )
+  }
+
+  showSuccessMessage(message: string) {
+    this.successMessage = message;
+    this.errorMessage = null; // Limpa a mensagem de erro
+    setTimeout(() => {
+      this.successMessage = null; // Limpa a mensagem de sucesso após alguns segundos
+    }, 3000); // Tempo em milissegundos
+  }
+
+  // Método para exibir uma mensagem de erro
+  showErrorMessage(message: string) {
+    this.errorMessage = message;
+    this.successMessage = null; // Limpa a mensagem de sucesso
+    setTimeout(() => {
+      this.errorMessage = null; // Limpa a mensagem de erro após alguns segundos
+    }, 3000); // Tempo em milissegundos
   }
 }

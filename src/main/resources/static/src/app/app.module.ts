@@ -15,6 +15,8 @@ import * as $ from "jquery";
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { LivroCadastroComponent } from './livro-cadastro/livro-cadastro.component';
 import { NgxMaskModule } from 'ngx-mask';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { NgxMaskModule } from 'ngx-mask';
     FormsModule,
     HttpClientModule,
     NgxMaskModule.forRoot(),
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [
     provideClientHydration()
