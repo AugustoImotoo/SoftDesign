@@ -2,10 +2,10 @@ header {
   background-color: #333;
   color: #333;
   padding: 5px;
-  position: fixed; /* Alterado para 'fixed' para manter o cabeçalho fixo no topo */
+  position: fixed;
   top: 0;
-  width: 100%; /* Definir a largura para preencher toda a largura da tela */
-  z-index: 1000; /* Defina um z-index maior para o cabeçalho */
+  width: 100%; 
+  z-index: 1000;
 }
 
 .logo-container {

@@ -88,17 +88,15 @@ export class LivroCadastroComponent {
       () => {
         const index = this.livros.findIndex(p => p.id === livro.id);
         if (index !== -1) {
-          this.livros.splice(index, 1); // Remover o livro excluído da lista de livros
+          this.livros.splice(index, 1);
           console.log('Livro excluído:', livro);
         } else {
           console.error('Erro: Livro não encontrado na lista');
         }
-        // Atualizar a lista de livros na interface do usuário após a exclusão
         this.carregarLivros();
       },
       error => {
         console.error('Erro ao excluir livro:', error);
-        // Atualizar a lista de livros na interface do usuário mesmo se houver um erro
         this.carregarLivros();
       }
     )
@@ -111,7 +109,7 @@ export class LivroCadastroComponent {
   carregarPessoas(): void {
     this.getPessoas().subscribe(pessoas => {
       this.pessoas = pessoas;
-      console.log(this.pessoas); // Isso imprimirá os dados corretamente
+      console.log(this.pessoas);
     });
   }
 
