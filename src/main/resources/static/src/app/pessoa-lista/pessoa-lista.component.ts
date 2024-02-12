@@ -15,11 +15,11 @@ export interface Pessoa {
 export class PessoaListaComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nome', 'telefone'];
   pessoas: Pessoa[] = [];
-  novaPessoa: any = { // Declare novaPessoa como um objeto vazio
+  novaPessoa: any = {
     nomeCompleto: '',
     telefone: ''
   };
-  mostrarOpcoes = false;
+  pessoaSelecionada: Pessoa | null = null;
 
   constructor(private http: HttpClient) { }
 
@@ -42,8 +42,8 @@ export class PessoaListaComponent implements OnInit {
     this.http.post('http://localhost:8080/pessoa', novaPessoa).subscribe(
       response => {
         console.log('Pessoa cadastrada com sucesso:', response);
-        this.carregarPessoas(); // Atualiza a lista de pessoas
-        this.fecharModalAdicao(); // Fecha o modal após adicionar pessoa
+        this.carregarPessoas(); 
+        this.fecharModalAdicao(); 
       },
       error => {
         console.error('Erro ao cadastrar pessoa:', error);
@@ -51,12 +51,39 @@ export class PessoaListaComponent implements OnInit {
     );
   }
 
-  abrirModalAdicao() {
-    this.novaPessoa = {}; // Limpa os campos do formulário ao abrir o modal
-    $('#adicionarPessoaModal').modal('show'); // Abre o modal
+  abrirModalAdicao(pessoa?: Pessoa) {
+    if (pessoa) {
+      this.novaPessoa = { ...pessoa }; 
+    } else {
+      this.novaPessoa = { id: 0, nomeCompleto: '', telefone: '' }; 
+    }
+    $('#adicionarPessoaModal').modal('show');
   }
 
   fecharModalAdicao() {
-    $('#adicionarPessoaModal').modal('hide'); // Fecha o modal
+    $('#adicionarPessoaModal').modal('hide'); 
+  }
+
+  editarPessoa(pessoa: Pessoa) {
+    this.abrirModalAdicao(pessoa);
+  }
+
+  excluirPessoa(pessoa: Pessoa) {
+    const url = `http://localhost:8080/pessoa/${pessoa.id}`;
+  
+    this.http.delete(url).subscribe(
+      () => {
+        const index = this.pessoas.findIndex(p => p.id === pessoa.id);
+        if (index !== -1) {
+          this.pessoas.splice(index, 1);
+          console.log('Pessoa excluída:', pessoa);
+        } else {
+          console.error('Erro: Pessoa não encontrada na lista');
+        }
+      },
+      error => {
+        console.error('Erro ao excluir pessoa:', error);
+      }
+    )
   }
 }

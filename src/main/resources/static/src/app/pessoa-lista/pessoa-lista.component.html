@@ -4,9 +4,10 @@
 <table class="table table-striped">
   <thead class="thead-dark">
     <tr>
-      <th>ID</th>
-      <th>Nome</th>
-      <th>Telefone</th>
+      <th class="titulo-tabela">ID</th>
+      <th class="titulo-tabela">Nome</th>
+      <th class="titulo-tabela">Telefone</th>
+      <th class="titulo-tabela">Ações</th>
     </tr>
   </thead>
   <tbody>
@@ -14,6 +15,10 @@
       <td>{{ pessoa.id }}</td>
       <td>{{ pessoa.nomeCompleto }}</td>
       <td>{{ pessoa.telefone }}</td>
+      <td>
+        <button type="button" class="btn btn-primary" (click)="editarPessoa(pessoa)">Editar</button>
+        <button type="button" class="btn btn-danger" (click)="excluirPessoa(pessoa)">Excluir</button>
+      </td>
     </tr>
   </tbody>
 </table>
