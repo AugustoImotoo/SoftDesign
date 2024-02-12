@@ -1,27 +1,24 @@
-/* Estilizando a barra lateral */
 .sidebar {
-    position: fixed; /* Fixa a barra lateral à esquerda */
-    top: 0; /* Define a barra lateral no topo */
-    left: 0; /* Define a barra lateral no canto esquerdo */
-    bottom: 0; /* Estende a barra lateral até o final da página */
-    z-index: 100; /* Garante que a barra lateral esteja acima do conteúdo */
-    padding: 48px 0; /* Adiciona padding ao topo e ao fundo */
-    width: 150px; /* Largura da barra lateral */
-    background-color: #333; /* Cor de fundo da barra lateral */
-    color: #fff; /* Cor do texto da barra lateral */
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    bottom: 0; 
+    z-index: 100; 
+    padding: 48px 0; 
+    width: 150px; 
+    background-color: #333; 
+    color: #fff; 
   }
   
-  /* Estilizando os links da barra lateral */
   .sidebar .nav-link {
-    padding: 10px 20px; /* Espaçamento interno dos links */
-    color: #fff; /* Cor do texto dos links */
+    padding: 10px 20px; 
+    color: #fff; 
   }
   
-  /* Estilizando o cabeçalho da barra lateral */
   .sidebar-heading {
-    padding: 20px 20px; /* Espaçamento interno do cabeçalho */
-    margin-bottom: 20px; /* Margem inferior do cabeçalho */
-    font-size: 1.25rem; /* Tamanho da fonte do cabeçalho */
-    color: #fff; /* Cor do texto do cabeçalho */
+    padding: 20px 20px;
+    margin-bottom: 20px;
+    font-size: 1.25rem;
+    color: #fff;
   }
   
