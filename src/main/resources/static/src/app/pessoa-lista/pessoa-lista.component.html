@@ -1,0 +1,52 @@
+<!-- Botão para abrir o modal -->
+<button type="button" class="btn btn-primary mb-4 mt-4" (click)="abrirModalAdicao()">Adicionar Pessoa</button>
+
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th class="titulo-tabela">ID</th>
+      <th class="titulo-tabela">Nome</th>
+      <th class="titulo-tabela">Telefone</th>
+      <th class="titulo-tabela">Ações</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pessoa of pessoas">
+      <td>{{ pessoa.id }}</td>
+      <td>{{ pessoa.nomeCompleto }}</td>
+      <td>{{ pessoa.telefone }}</td>
+      <td>
+        <button type="button" class="btn btn-primary" (click)="editarPessoa(pessoa)">Editar</button>
+        <button type="button" class="btn btn-danger" (click)="excluirPessoa(pessoa)">Excluir</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Modal -->
+<div class="modal" id="adicionarPessoaModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Adicionar Pessoa</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="fecharModalAdicao()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form (submit)="adicionarPessoa(novaPessoa)">
+          <div class="form-group">
+            <label for="nomeCompleto">Nome:</label>
+            <input type="text" class="form-control" id="nomeCompleto" [(ngModel)]="novaPessoa.nomeCompleto" name="nomeCompleto" required>
+          </div>
+          <div class="form-group">
+            <label for="telefone">Telefone:</label>
+            <input type="text" class="form-control" id="telefone" [(ngModel)]="novaPessoa.telefone" name="telefone" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Adicionar Pessoa</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

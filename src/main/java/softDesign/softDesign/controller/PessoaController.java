@@ -35,4 +35,14 @@ public class PessoaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(pessoaSalvar);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> excluirPessoa(@PathVariable Long id) {
+        boolean pessoaExcluida = pessoaService.excluirPessoa(id);
+        if (pessoaExcluida) {
+            return ResponseEntity.noContent().build(); // Retorna 204 No Content se a exclusão for bem-sucedida
+        } else {
+            return ResponseEntity.notFound().build(); // Retorna 404 Not Found se a pessoa não for encontrada
+        }
+    }
+
 }

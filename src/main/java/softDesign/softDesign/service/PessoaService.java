@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import softDesign.softDesign.repository.PessoaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PessoaService {
@@ -24,4 +25,15 @@ public class PessoaService {
     public Pessoa salvarPessoa(Pessoa pessoa){
         return pessoaRepository.save(pessoa);
     }
+
+    public boolean excluirPessoa(Long id) {
+        Optional<Pessoa> pessoaOptional = pessoaRepository.findById(id);
+        if (pessoaOptional.isPresent()) {
+            pessoaRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
