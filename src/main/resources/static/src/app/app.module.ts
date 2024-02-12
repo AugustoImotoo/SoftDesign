@@ -13,13 +13,16 @@ import { HttpClientModule } from '@angular/common/http';
 import * as bootstrap from "bootstrap";
 import * as $ from "jquery";
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { LivroCadastroComponent } from './livro-cadastro/livro-cadastro.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     PessoaListaComponent,
-    SidebarComponent
+    SidebarComponent,
+    LivroCadastroComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +30,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     MatListModule,
     MatTableModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxMaskModule.forRoot(),
   ],
   providers: [
     provideClientHydration()

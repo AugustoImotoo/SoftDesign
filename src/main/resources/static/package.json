@@ -25,6 +25,7 @@
     "bootstrap": "^3.4.1",
     "express": "^4.18.2",
     "jquery": "^3.7.1",
+    "ngx-mask": "^13.1.13",
     "popper.js": "^1.14.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
