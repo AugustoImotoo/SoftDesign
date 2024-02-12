@@ -74,7 +74,7 @@ public class LivroController {
         boolean sucesso = livroService.alugarLivro(livroId, pessoa, dataDevolucao);
 
         if (sucesso) {
-            return ResponseEntity.ok("Livro alugado com sucesso.");
+            return ResponseEntity.ok().body("{\"message\": \"Livro alugado com sucesso.\"}");
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Não foi possível alugar o livro.");
         }
@@ -90,7 +90,7 @@ public class LivroController {
         boolean sucesso = livroService.devolverLivro(livroId, pessoa);
 
         if (sucesso) {
-            return ResponseEntity.ok("Livro devolvido com sucesso.");
+            return ResponseEntity.ok().body("{\"message\": \"Livro devolvido com sucesso.\"}");
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Não foi possível alugar o livro.");
         }
