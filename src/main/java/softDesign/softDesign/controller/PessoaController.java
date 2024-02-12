@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import softDesign.softDesign.service.PessoaService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/pessoa")
 public class PessoaController {
 

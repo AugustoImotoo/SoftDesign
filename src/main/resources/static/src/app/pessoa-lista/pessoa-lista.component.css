@@ -1,0 +1,14 @@
+app-pessoa-lista {
+  margin-top: 100%; /* Ajuste conforme necessário */
+}
+
+/* Estilo para a tabela */
+table {
+  width: 100%;
+  margin-bottom: 10%; /* Espaço entre a tabela e o formulário */
+}
+
+/* Estilo para o formulário */
+form {
+  margin-top: 20px; /* Espaço entre o formulário e a tabela */
+}

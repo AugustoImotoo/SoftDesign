@@ -1,3 +1,14 @@
-<app-header></app-header>
-<app-sidebar></app-sidebar>
-<router-outlet></router-outlet>
+<div class="header-container">
+  <app-header></app-header>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <!-- Sidebar -->
+    <app-sidebar></app-sidebar>
+    <!-- Conteúdo Principal -->
+    <div class="pessoa-lista-container">
+      <router-outlet></router-outlet> <!-- Carrega o componente PessoaListaComponent quando a rota 'item1' for acionada -->
+    </div>
+  </div>
+</div>
