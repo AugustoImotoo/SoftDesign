@@ -1,0 +1,80 @@
+<!-- Botão para abrir o modal -->
+<button type="button" class="btn btn-primary mb-4 mt-4" (click)="abrirModalAdicao()">Adicionar Livro</button>
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th class="titulo-tabela">ID</th>
+        <th class="titulo-tabela">Título</th>
+        <th class="titulo-tabela">Autor</th>
+        <th class="titulo-tabela">Editora</th>
+        <th class="titulo-tabela">Alugado</th>
+        <th class="titulo-tabela">Pessoa que Alugou</th>
+        <th class="titulo-tabela">Data de Devolução</th>
+        <th class="titulo-tabela">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let livro of livros">
+        <td>{{ livro.id }}</td>
+        <td>{{ livro.titulo }}</td>
+        <td>{{ livro.autor }}</td>
+        <td>{{ livro.editora }}</td>
+        <td>{{ livro.alugado }}</td>
+        <td>{{ livro.pessoaQueAlugou?.nomeCompleto }}</td>
+        <td>{{ livro.dataDevolucao }}</td>
+        <td>
+        <button type="button" class="btn btn-primary" (click)="editarLivro(livro)">Editar</button>
+        <button type="button" class="btn btn-danger" (click)="excluirLivro(livro)">Excluir</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Modal -->
+<div class="modal" id="adicionarLivroModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Adicionar Livro</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="fecharModalAdicao()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form (submit)="adicionarLivro(novoLivro)">
+            <div class="form-group">
+              <label for="titulo">Título:</label>
+              <input type="text" class="form-control" id="titulo" [(ngModel)]="novoLivro.titulo" name="titulo" required>
+            </div>
+            <div class="form-group">
+              <label for="autor">Autor:</label>
+              <input type="text" class="form-control" id="autor" [(ngModel)]="novoLivro.autor" name="autor" required>
+            </div>
+            <div class="form-group">
+              <label for="editora">Editora:</label>
+              <input type="text" class="form-control" id="editora" [(ngModel)]="novoLivro.editora" name="editora" required>
+            </div>
+            <div class="form-group">
+              <label for="alugado">Alugado:</label>
+              <select class="form-control" id="alugado" [(ngModel)]="novoLivro.alugado" name="alugado" (change)="limparCampos()" required>
+                <option value="SIM">Sim</option>
+                <option value="NAO">Não</option>
+              </select>
+            </div>
+            <div class="form-group" *ngIf="novoLivro.alugado === 'SIM'">
+              <label for="pessoaQueAlugou">Pessoa que alugou:</label>
+              <select class="form-control" id="pessoaQueAlugou" [(ngModel)]="novoLivro.pessoaQueAlugou" name="pessoaQueAlugou">
+                <option *ngFor="let pessoa of pessoas" [ngValue]="pessoa">{{ pessoa.nomeCompleto }}</option>
+              </select>
+            </div>
+            <div class="form-group" *ngIf="novoLivro.alugado === 'SIM'">
+              <label for="dataDevolucao">Data de Devolução:</label>
+              <input type="date" class="form-control" id="dataDevolucao" [(ngModel)]="novoLivro.dataDevolucao" name="dataDevolucao">
+            </div>
+            <button type="submit" class="btn btn-primary">Adicionar Livro</button>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>

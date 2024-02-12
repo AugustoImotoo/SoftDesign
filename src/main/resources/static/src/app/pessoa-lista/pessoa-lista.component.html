@@ -14,7 +14,7 @@
     <tr *ngFor="let pessoa of pessoas">
       <td>{{ pessoa.id }}</td>
       <td>{{ pessoa.nomeCompleto }}</td>
-      <td>{{ pessoa.telefone }}</td>
+      <td>{{ pessoa.telefone | mask: '(00) 0000-0000' }}</td>
       <td>
         <button type="button" class="btn btn-primary" (click)="editarPessoa(pessoa)">Editar</button>
         <button type="button" class="btn btn-danger" (click)="excluirPessoa(pessoa)">Excluir</button>
@@ -41,7 +41,7 @@
           </div>
           <div class="form-group">
             <label for="telefone">Telefone:</label>
-            <input type="text" class="form-control" id="telefone" [(ngModel)]="novaPessoa.telefone" name="telefone" required>
+            <input type="text" class="form-control" id="telefone" [(ngModel)]="novaPessoa.telefone" name="telefone" mask="(00) 0000-0000" required>
           </div>
           <button type="submit" class="btn btn-primary">Adicionar Pessoa</button>
         </form>
