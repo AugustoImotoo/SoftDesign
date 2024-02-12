@@ -1,23 +1,27 @@
+/* Estilizando a barra lateral */
 .sidebar {
-    position: fixed; /* Manter o sidebar fixo na tela durante a rolagem */
-    top: 50px; /* Adicionar margem superior para criar espaço entre o cabeçalho e a sidebar */
-    left: 0;
-    height: calc(100% - 60px); /* Ajustar a altura para levar em conta a margem superior do cabeçalho */
-    background-color: #333;
-    padding: 20px;
-    z-index: 999; /* Defina um z-index maior para a sidebar */
+    position: fixed; /* Fixa a barra lateral à esquerda */
+    top: 0; /* Define a barra lateral no topo */
+    left: 0; /* Define a barra lateral no canto esquerdo */
+    bottom: 0; /* Estende a barra lateral até o final da página */
+    z-index: 100; /* Garante que a barra lateral esteja acima do conteúdo */
+    padding: 48px 0; /* Adiciona padding ao topo e ao fundo */
+    width: 150px; /* Largura da barra lateral */
+    background-color: #333; /* Cor de fundo da barra lateral */
+    color: #fff; /* Cor do texto da barra lateral */
   }
   
-  .sidebar ul {
-    list-style-type: none;
-    padding: 0;
+  /* Estilizando os links da barra lateral */
+  .sidebar .nav-link {
+    padding: 10px 20px; /* Espaçamento interno dos links */
+    color: #fff; /* Cor do texto dos links */
   }
   
-  .sidebar ul li {
-    margin-bottom: 10px;
+  /* Estilizando o cabeçalho da barra lateral */
+  .sidebar-heading {
+    padding: 20px 20px; /* Espaçamento interno do cabeçalho */
+    margin-bottom: 20px; /* Margem inferior do cabeçalho */
+    font-size: 1.25rem; /* Tamanho da fonte do cabeçalho */
+    color: #fff; /* Cor do texto do cabeçalho */
   }
   
-  .sidebar ul li a {
-    color: #fff;
-    text-decoration: none;
-  }

@@ -15,11 +15,11 @@ export interface Pessoa {
 export class PessoaListaComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nome', 'telefone'];
   pessoas: Pessoa[] = [];
-  novaPessoa: any = { // Declare novaPessoa como um objeto vazio
+  novaPessoa: any = {
     nomeCompleto: '',
     telefone: ''
   };
-  pessoaSelecionada: Pessoa | null = null; // Armazena a pessoa selecionada para edição
+  pessoaSelecionada: Pessoa | null = null;
 
   constructor(private http: HttpClient) { }
 
@@ -42,8 +42,8 @@ export class PessoaListaComponent implements OnInit {
     this.http.post('http://localhost:8080/pessoa', novaPessoa).subscribe(
       response => {
         console.log('Pessoa cadastrada com sucesso:', response);
-        this.carregarPessoas(); // Atualiza a lista de pessoas
-        this.fecharModalAdicao(); // Fecha o modal após adicionar pessoa
+        this.carregarPessoas(); 
+        this.fecharModalAdicao(); 
       },
       error => {
         console.error('Erro ao cadastrar pessoa:', error);
@@ -53,27 +53,26 @@ export class PessoaListaComponent implements OnInit {
 
   abrirModalAdicao(pessoa?: Pessoa) {
     if (pessoa) {
-      this.novaPessoa = { ...pessoa }; // Preenche o formulário com os dados da pessoa selecionada
+      this.novaPessoa = { ...pessoa }; 
     } else {
-      this.novaPessoa = { id: 0, nomeCompleto: '', telefone: '' }; // Limpa o formulário para adição
+      this.novaPessoa = { id: 0, nomeCompleto: '', telefone: '' }; 
     }
     $('#adicionarPessoaModal').modal('show');
   }
 
   fecharModalAdicao() {
-    $('#adicionarPessoaModal').modal('hide'); // Fecha o modal
+    $('#adicionarPessoaModal').modal('hide'); 
   }
 
   editarPessoa(pessoa: Pessoa) {
-    this.abrirModalAdicao(pessoa); // Abre o modal para edição com os dados da pessoa selecionada
+    this.abrirModalAdicao(pessoa);
   }
 
   excluirPessoa(pessoa: Pessoa) {
-    const url = `http://localhost:8080/pessoa/${pessoa.id}`; // Supondo que sua API REST use uma rota como /pessoa/:id para exclusão
+    const url = `http://localhost:8080/pessoa/${pessoa.id}`;
   
     this.http.delete(url).subscribe(
       () => {
-        // Se a exclusão for bem-sucedida, você pode remover a pessoa da lista localmente
         const index = this.pessoas.findIndex(p => p.id === pessoa.id);
         if (index !== -1) {
           this.pessoas.splice(index, 1);
