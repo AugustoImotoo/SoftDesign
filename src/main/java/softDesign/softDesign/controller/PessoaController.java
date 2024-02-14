@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import softDesign.softDesign.service.LivroService;
 import softDesign.softDesign.service.PessoaService;
 
 @RestController
@@ -12,9 +13,12 @@ import softDesign.softDesign.service.PessoaService;
 @RequestMapping("/pessoa")
 public class PessoaController {
 
-    @Autowired
     private PessoaService pessoaService;
 
+    @Autowired
+    public PessoaController(PessoaService pessoaService) {
+        this.pessoaService = pessoaService;
+    }
     @GetMapping
     public ResponseEntity<?> listarPessoa() {
         return ResponseEntity.ok(pessoaService.listarPessoas());

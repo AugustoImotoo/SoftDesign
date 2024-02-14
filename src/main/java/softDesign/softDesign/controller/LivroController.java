@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import softDesign.softDesign.entity.AluguelRequest;
+import softDesign.softDesign.DTO.AluguelDTO;
 import softDesign.softDesign.entity.Livro;
 import softDesign.softDesign.entity.Pessoa;
 import softDesign.softDesign.service.LivroService;
@@ -18,11 +18,14 @@ import java.util.List;
 @RequestMapping("/livro")
 public class LivroController {
 
-    @Autowired
-    private LivroService livroService;
+    private final LivroService livroService;
+    private final PessoaService pessoaService;
 
     @Autowired
-    private PessoaService pessoaService;
+    public LivroController(LivroService livroService, PessoaService pessoaService) {
+        this.livroService = livroService;
+        this.pessoaService = pessoaService;
+    }
 
     @GetMapping
     public ResponseEntity<?> listarLivros() {
@@ -64,12 +67,10 @@ public class LivroController {
     }
 
     @PutMapping("/alugar")
-    public ResponseEntity<?> alugarLivro(@RequestBody AluguelRequest aluguelRequest) {
+    public ResponseEntity<?> alugarLivro(@RequestBody AluguelDTO aluguelRequest) {
         Long livroId = aluguelRequest.getLivroId();
-        Long pessoaId = aluguelRequest.getPessoaId();
         LocalDate dataDevolucao = aluguelRequest.getDataDevolucao();
-
-        Pessoa pessoa = pessoaService.listarPessoaById(pessoaId);
+        Pessoa pessoa = pessoaService.listarPessoaById(aluguelRequest.getPessoaId());
 
         boolean sucesso = livroService.alugarLivro(livroId, pessoa, dataDevolucao);
 
@@ -81,11 +82,9 @@ public class LivroController {
     }
 
     @PutMapping("/devolver")
-    public ResponseEntity<?> devolverLivro(@RequestBody AluguelRequest aluguelRequest) {
-        Long pessoaId = aluguelRequest.getPessoaId();
+    public ResponseEntity<?> devolverLivro(@RequestBody AluguelDTO aluguelRequest) {
         Long livroId = aluguelRequest.getLivroId();
-
-        Pessoa pessoa = pessoaService.listarPessoaById(pessoaId);
+        Pessoa pessoa = pessoaService.listarPessoaById(aluguelRequest.getPessoaId());
 
         boolean sucesso = livroService.devolverLivro(livroId, pessoa);
 
